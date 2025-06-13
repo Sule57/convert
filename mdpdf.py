@@ -69,12 +69,35 @@ def convert_markdown_to_pdf(markdown_content, output_path):
     html = HTML(string=html_content)
     html.write_pdf(output_path)
 
+def print_banner():
+    """Print ASCII art banner."""
+    banner = """
+    ███╗   ███╗██████╗ ██████╗ ██████╗ ███████╗
+    ████╗ ████║██╔══██╗██╔══██╗██╔══██╗██╔════╝
+    ██╔████╔██║██║  ██║██║  ██║██████╔╝█████╗  
+    ██║╚██╔╝██║██║  ██║██║  ██║██╔══██╗██╔══╝  
+    ██║ ╚═╝ ██║██████╔╝██████╔╝██║  ██║███████╗
+    ╚═╝     ╚═╝╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+                                                
+    ██████╗ ██████╗ ███████╗██╗   ██╗██████╗ 
+    ██╔══██╗██╔══██╗██╔════╝██║   ██║██╔══██╗
+    ██████╔╝██║  ██║█████╗  ██║   ██║██║  ██║
+    ██╔═══╝ ██║  ██║██╔══╝  ██║   ██║██║  ██║
+    ██║     ██████╔╝███████╗╚██████╔╝██████╔╝
+    ╚═╝     ╚═════╝ ╚══════╝ ╚═════╝ ╚═════╝ 
+    
+    Created by Sule57
+    """
+    click.echo(banner)
+
 @click.command()
 @click.argument('markdown_text', required=False)
 @click.option('-f', '--file', help='Path to the input markdown file')
 @click.option('-o', '--output', help='Path to the output PDF file')
 def main(markdown_text, file, output):
     """Convert markdown to PDF."""
+    print_banner()
+    
     if not markdown_text and not file:
         click.echo('Error: Either provide markdown text or use -f option to specify a file')
         sys.exit(1)
