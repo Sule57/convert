@@ -1,0 +1,5 @@
+click>=8.1.7
+markdown>=3.5.2
+weasyprint>=60.2
+prompt-toolkit>=3.0.43
+pydyf>=0.8.0 
