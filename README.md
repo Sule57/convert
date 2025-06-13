@@ -25,7 +25,7 @@ git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
 # Install Python dependencies
-pip3 install -r requirements.txt
+pip3 install --user -r requirements.txt
 
 # Make the CLI globally available
 ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
@@ -42,7 +42,7 @@ git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
 # Install Python dependencies
-pip3 install -r requirements.txt
+pip3 install --user -r requirements.txt
 
 # Make the CLI globally available
 sudo ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
@@ -58,7 +58,7 @@ git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
 # Install Python dependencies
-python -m pip install -r requirements.txt
+python -m pip install --user -r requirements.txt
 
 # Add the CLI to your PATH for this session
 $env:Path += ";$(Get-Location)"
