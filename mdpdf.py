@@ -92,7 +92,9 @@ def print_banner():
         mdpdf "Your markdown text here"
         mdpdf -f input.md
         mdpdf -f input.md -o output.pdf
-    """
+    """,
+    add_help_option=True,
+    no_args_is_help=True
 )
 @click.argument('markdown_text', required=False)
 @click.option('-f', '--file', help='Path to the input markdown file')
