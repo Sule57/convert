@@ -1,5 +1,18 @@
 # MDPDF - Markdown to PDF Converter
 
+A simple and elegant CLI tool for converting markdown files into beautifully formatted PDFs.
+
+[![GitHub](https://img.shields.io/github/license/Sule57/mdpdf)](https://github.com/Sule57/mdpdf/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/stars/Sule57/mdpdf)](https://github.com/Sule57/mdpdf/stargazers)
+
+## Features
+
+- 🎨 Beautiful PDF output with proper styling
+- 📝 Support for markdown tables and code blocks
+- 🚀 Simple and intuitive CLI interface
+- 💻 Cross-platform support (macOS, Linux, Windows)
+- 🔄 Interactive output path selection
+
 ## 🚀 Quick Install
 
 ### macOS (with Homebrew)
@@ -8,8 +21,8 @@
 brew install cairo pango gdk-pixbuf libffi gobject-introspection
 
 # Clone the repo and enter the directory
-git clone https://github.com/yourusername/MD-PDF.git
-cd MD-PDF
+git clone https://github.com/Sule57/mdpdf.git
+cd mdpdf
 
 # Create and activate a virtual environment
 python3 -m venv venv
@@ -31,8 +44,8 @@ sudo apt update
 sudo apt install -y python3-venv python3-pip libcairo2 pango1.0-tools libgdk-pixbuf2.0-0 libffi-dev gir1.2-pango-1.0
 
 # Clone the repo and enter the directory
-git clone https://github.com/yourusername/MD-PDF.git
-cd MD-PDF
+git clone https://github.com/Sule57/mdpdf.git
+cd mdpdf
 
 # Create and activate a virtual environment
 python3 -m venv venv
@@ -53,8 +66,8 @@ echo "Installation complete! You can now use 'mdpdf' from anywhere."
 choco install -y python cairo pango gdk-pixbuf libffi
 
 # Clone the repo and enter the directory
-git clone https://github.com/yourusername/MD-PDF.git
-cd MD-PDF
+git clone https://github.com/Sule57/mdpdf.git
+cd mdpdf
 
 # Create and activate a virtual environment
 python -m venv venv
@@ -71,6 +84,14 @@ Set-Alias mdpdf $(Get-Location)\mdpdf.py
 
 Write-Host "Installation complete! You can now use 'mdpdf' from this terminal."
 ```
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
