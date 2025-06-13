@@ -82,7 +82,18 @@ def print_banner():
     """
     click.echo(banner)
 
-@click.command()
+@click.command(
+    help="""Convert markdown to PDF.
+    
+    You can either provide markdown text directly or specify a file using -f/--file.
+    The output PDF path can be specified using -o/--output, or you'll be prompted for it.
+    
+    Examples:
+        mdpdf "Your markdown text here"
+        mdpdf -f input.md
+        mdpdf -f input.md -o output.pdf
+    """
+)
 @click.argument('markdown_text', required=False)
 @click.option('-f', '--file', help='Path to the input markdown file')
 @click.option('-o', '--output', help='Path to the output PDF file')
