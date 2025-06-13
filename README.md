@@ -24,28 +24,48 @@ brew install cairo pango gdk-pixbuf libffi gobject-introspection
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
-# Install Python dependencies
-pip3 install --user -r requirements.txt
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate
 
-# Make the CLI globally available
-ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Add alias to your shell config (choose one based on your shell)
+# For zsh (default on newer macOS):
+echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.zshrc
+source ~/.zshrc
+
+# For bash:
+# echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.bash_profile
+# source ~/.bash_profile
 ```
 
 ### Ubuntu/Debian Linux
 ```bash
 # Install system dependencies
 sudo apt update
-sudo apt install -y python3-pip libcairo2 pango1.0-tools libgdk-pixbuf2.0-0 libffi-dev gir1.2-pango-1.0
+sudo apt install -y python3-venv python3-pip libcairo2 pango1.0-tools libgdk-pixbuf2.0-0 libffi-dev gir1.2-pango-1.0
 
 # Clone the repo and enter the directory
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
-# Install Python dependencies
-pip3 install --user -r requirements.txt
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate
 
-# Make the CLI globally available
-sudo ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Add alias to your shell config (choose one based on your shell)
+# For bash (default on most Linux):
+echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.bashrc
+source ~/.bashrc
+
+# For zsh:
+# echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.zshrc
+# source ~/.zshrc
 ```
 
 ### Windows (PowerShell)
@@ -57,14 +77,19 @@ choco install -y python cairo pango gdk-pixbuf libffi
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
+# Create and activate virtual environment
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
 # Install Python dependencies
-python -m pip install --user -r requirements.txt
+python -m pip install -r requirements.txt
 
-# Add the CLI to your PATH for this session
-$env:Path += ";$(Get-Location)"
-
-# (Optional) Add an alias for easier use
-Set-Alias mdpdf $(Get-Location)\mdpdf.py
+# Add alias to PowerShell profile (creates if doesn't exist)
+if (!(Test-Path -Path $PROFILE)) {
+    New-Item -ItemType File -Path $PROFILE -Force
+}
+Add-Content -Path $PROFILE -Value "`nfunction mdpdf { & '$(Get-Location)\venv\Scripts\python.exe' '$(Get-Location)\mdpdf.py' `$args }"
+. $PROFILE
 ```
 
 ## Contributing
