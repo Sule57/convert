@@ -31,10 +31,8 @@ source venv/bin/activate
 # Install Python dependencies
 pip3 install -r requirements.txt
 
-# Make the CLI globally available
+# Make the CLI globally available (this line may fail since sometimes it needs sudo privileges)
 ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
-
-echo "Installation complete! You can now use 'mdpdf' from anywhere."
 ```
 
 ### Ubuntu/Debian Linux
@@ -54,10 +52,8 @@ source venv/bin/activate
 # Install Python dependencies
 pip3 install -r requirements.txt
 
-# Make the CLI globally available
+# Make the CLI globally available (this line may fail since sometimes it needs sudo privileges)
 sudo ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
-
-echo "Installation complete! You can now use 'mdpdf' from anywhere."
 ```
 
 ### Windows (PowerShell)
@@ -79,10 +75,8 @@ python -m pip install -r requirements.txt
 # Add the CLI to your PATH for this session
 $env:Path += ";$(Get-Location)"
 
-# (Optional) Add an alias for easier use
+# (Optional) Add an alias for easier use (I have no idea if it works on Windows because let's be honest, no1 ACTUALLY likes windows)
 Set-Alias mdpdf $(Get-Location)\mdpdf.py
-
-Write-Host "Installation complete! You can now use 'mdpdf' from this terminal."
 ```
 
 ## Contributing
