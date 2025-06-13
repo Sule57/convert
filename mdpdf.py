@@ -71,7 +71,7 @@ def convert_markdown_to_pdf(markdown_content, output_path):
 
 def print_banner():
     """Print ASCII art banner."""
-    banner = """
+    banner = r"""
               _         _  ___ 
     ._ _ _  _| | ___  _| || | '
     | ' ' |/ . || . \/ . || |- 
