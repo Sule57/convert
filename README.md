@@ -24,14 +24,10 @@ brew install cairo pango gdk-pixbuf libffi gobject-introspection
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
-# Create and activate a virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
 # Install Python dependencies
 pip3 install -r requirements.txt
 
-# Make the CLI globally available (this line may fail since sometimes it needs sudo privileges)
+# Make the CLI globally available
 ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
 ```
 
@@ -39,20 +35,16 @@ ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
 ```bash
 # Install system dependencies
 sudo apt update
-sudo apt install -y python3-venv python3-pip libcairo2 pango1.0-tools libgdk-pixbuf2.0-0 libffi-dev gir1.2-pango-1.0
+sudo apt install -y python3-pip libcairo2 pango1.0-tools libgdk-pixbuf2.0-0 libffi-dev gir1.2-pango-1.0
 
 # Clone the repo and enter the directory
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
-# Create and activate a virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
 # Install Python dependencies
 pip3 install -r requirements.txt
 
-# Make the CLI globally available (this line may fail since sometimes it needs sudo privileges)
+# Make the CLI globally available
 sudo ln -sf "$(pwd)/mdpdf.py" /usr/local/bin/mdpdf
 ```
 
@@ -65,17 +57,13 @@ choco install -y python cairo pango gdk-pixbuf libffi
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
-# Create and activate a virtual environment
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-
 # Install Python dependencies
 python -m pip install -r requirements.txt
 
 # Add the CLI to your PATH for this session
 $env:Path += ";$(Get-Location)"
 
-# (Optional) Add an alias for easier use (I have no idea if it works on Windows because let's be honest, no1 ACTUALLY likes windows)
+# (Optional) Add an alias for easier use
 Set-Alias mdpdf $(Get-Location)\mdpdf.py
 ```
 
