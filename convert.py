@@ -18,15 +18,14 @@ from converters.image_converter import (
 def print_banner():
     """Print ASCII art banner."""
     banner = r"""
-     _____                            _   
-    /  __ \                          | |  
-    | /  \/ ___  _ __   ___ _ __ __ _| |_ 
-    | |    / _ \| '_ \ / _ \ '__/ _` | __|
-    | \__/\ (_) | | | |  __/ | | (_| | |_ 
-     \____/\___/|_| |_|\___|_|  \__,_|\__|
+  ____                          _   
+ / ___|___  _ ____   _____ _ __| |_ 
+| |   / _ \| '_ \ \ / / _ \ '__| __|
+| |__| (_) | | | \ V /  __/ |  | |_ 
+ \____\___/|_| |_|\_/ \___|_|   \__|
     
-    Universal File Converter
-    Created by Sule57
+Universal File Converter
+Created by Sule57
     """
     click.echo(banner)
 
