@@ -17,101 +17,139 @@ A powerful command-line tool for converting files between different formats. Cur
 
 ## Installation
 
-### macOS (zsh and bash)
+### Step 1: Install Dependencies
 
-1. **Install system dependencies:**
-   ```bash
-   brew install cairo pango gdk-pixbuf libffi
-   ```
-2. **Clone the repository and run the installer:**
-   ```bash
-   git clone https://github.com/Sule57/convert.git
-   cd convert
-   chmod +x install.sh
-   ./install.sh
-   ```
-   - The script will detect your shell (zsh or bash) and add the `convert` alias automatically.
-   - For bash users on macOS, the alias is added to `~/.bash_profile` (the standard macOS bash config).
-   - For zsh users, the alias is added to `~/.zshrc`.
-   - If you use a custom shell, add the alias manually as shown in the "Manual Setup" section below.
+#### macOS
+```bash
+# Install system dependencies
+brew install cairo pango gdk-pixbuf libffi
 
-### Linux (bash)
+# Clone and install
+git clone https://github.com/Sule57/convert.git
+cd convert
+chmod +x install.sh
+./install.sh
+```
 
-1. **Install system dependencies:**
-   ```bash
-   sudo apt update
-   sudo apt install -y python3-venv python3-pip libcairo2 pango1.0-tools libgdk-pixbuf2.0-0 libffi-dev gir1.2-pango-1.0
-   ```
-2. **Clone the repository and run the installer:**
-   ```bash
-   git clone https://github.com/Sule57/convert.git
-   cd convert
-   chmod +x install.sh
-   ./install.sh
-   ```
-   - The script will add the `convert` alias to your `~/.bashrc`.
+#### Linux
+```bash
+# Install system dependencies
+sudo apt update
+sudo apt install -y python3-venv python3-pip libcairo2 pango1.0-tools libgdk-pixbuf2.0-0 libffi-dev gir1.2-pango-1.0
 
-### Windows (PowerShell)
+# Clone and install
+git clone https://github.com/Sule57/convert.git
+cd convert
+chmod +x install.sh
+./install.sh
+```
 
-1. **Install system dependencies:**
-   - Use [Chocolatey](https://chocolatey.org/) to install dependencies:
-     ```powershell
-     choco install -y python cairo pango gdk-pixbuf libffi
-     ```
-2. **Clone the repository and set up the environment:**
-   ```powershell
-   git clone https://github.com/Sule57/convert.git
-   cd convert
-   python -m venv venv
-   .\venv\Scripts\Activate.ps1
-   python -m pip install -r requirements.txt
-   ```
-3. **Add a PowerShell function for convenience:**
-   ```powershell
-   if (!(Test-Path -Path $PROFILE)) {
-       New-Item -ItemType File -Path $PROFILE -Force
-   }
-   Add-Content -Path $PROFILE -Value "`nfunction convert { & '$(Get-Location)\venv\Scripts\python.exe' '$(Get-Location)\convert.py' $args }"
-   . $PROFILE
-   ```
+#### Windows
+```powershell
+# Install system dependencies (requires Chocolatey)
+choco install -y python cairo pango gdk-pixbuf libffi
+
+# Clone and install
+git clone https://github.com/Sule57/convert.git
+cd convert
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+### Step 2: Set Up the Alias
+
+After running the install script, you need to manually set up the alias in your shell configuration.
+
+#### For zsh (macOS default)
+```bash
+# Get the current directory path
+pwd
+
+# Add the alias to your zsh configuration
+echo 'alias convert="/Users/yourusername/path/to/convert/venv/bin/python3 /Users/yourusername/path/to/convert/convert.py"' >> ~/.zshrc
+
+# Reload your shell configuration
+source ~/.zshrc
+```
+
+#### For bash on macOS
+```bash
+# Get the current directory path
+pwd
+
+# Add the alias to your bash configuration
+echo 'alias convert="/Users/yourusername/path/to/convert/venv/bin/python3 /Users/yourusername/path/to/convert/convert.py"' >> ~/.bash_profile
+
+# Reload your shell configuration
+source ~/.bash_profile
+```
+
+#### For bash on Linux
+```bash
+# Get the current directory path
+pwd
+
+# Add the alias to your bash configuration
+echo 'alias convert="/home/yourusername/path/to/convert/venv/bin/python3 /home/yourusername/path/to/convert/convert.py"' >> ~/.bashrc
+
+# Reload your shell configuration
+source ~/.bashrc
+```
+
+#### For PowerShell (Windows)
+```powershell
+# Get the current directory path
+Get-Location
+
+# Create PowerShell profile if it doesn't exist
+if (!(Test-Path -Path $PROFILE)) {
+    New-Item -ItemType File -Path $PROFILE -Force
+}
+
+# Add the function to your PowerShell profile
+Add-Content -Path $PROFILE -Value "`nfunction convert { & 'C:\path\to\convert\venv\Scripts\python.exe' 'C:\path\to\convert\convert.py' `$args }"
+
+# Reload your PowerShell profile
+. $PROFILE
+```
+
+### Step 3: Test the Installation
+
+After setting up the alias, test that it works:
+```bash
+convert --help
+```
+
+You should see the help message for the convert tool. If you get a "command not found" error, make sure you:
+1. Used the correct path from `pwd` in your alias
+2. Reloaded your shell configuration
+3. Restarted your terminal
 
 ---
 
-### Manual Setup (Alternative/Advanced)
+### Alternative: Manual Installation
 
-If you prefer not to use the install script, you can set up manually:
+If you prefer not to use the install script:
 
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/Sule57/convert.git
    cd convert
    ```
+
 2. **Create virtual environment:**
    ```bash
    python3 -m venv venv
    source venv/bin/activate
    ```
+
 3. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
-4. **Add alias to your shell config:**
-   - For zsh:
-     ```bash
-     echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.zshrc
-     source ~/.zshrc
-     ```
-   - For bash on macOS:
-     ```bash
-     echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.bash_profile
-     source ~/.bash_profile
-     ```
-   - For bash on Linux:
-     ```bash
-     echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.bashrc
-     source ~/.bashrc
-     ```
-   - For PowerShell (Windows): see above.
+
+4. **Set up the alias** (follow Step 2 above)
 
 ## Usage
 
