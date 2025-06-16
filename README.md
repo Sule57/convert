@@ -31,6 +31,8 @@ A powerful command-line tool for converting files between different formats. Cur
    ./install.sh
    ```
    - The script will detect your shell (zsh or bash) and add the `convert` alias automatically.
+   - For bash users on macOS, the alias is added to `~/.bash_profile` (the standard macOS bash config).
+   - For zsh users, the alias is added to `~/.zshrc`.
    - If you use a custom shell, add the alias manually as shown in the "Manual Setup" section below.
 
 ### Linux (bash)
@@ -99,7 +101,12 @@ If you prefer not to use the install script, you can set up manually:
      echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.zshrc
      source ~/.zshrc
      ```
-   - For bash:
+   - For bash on macOS:
+     ```bash
+     echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.bash_profile
+     source ~/.bash_profile
+     ```
+   - For bash on Linux:
      ```bash
      echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.bashrc
      source ~/.bashrc

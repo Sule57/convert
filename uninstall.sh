@@ -10,7 +10,12 @@ SHELL_CONFIG=""
 if [ "$SHELL" = "/bin/zsh" ]; then
     SHELL_CONFIG="$HOME/.zshrc"
 elif [ "$SHELL" = "/bin/bash" ]; then
-    SHELL_CONFIG="$HOME/.bashrc"
+    # On macOS, bash typically uses .bash_profile instead of .bashrc
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        SHELL_CONFIG="$HOME/.bash_profile"
+    else
+        SHELL_CONFIG="$HOME/.bashrc"
+    fi
 else
     echo "⚠️  Warning: Unsupported shell ($SHELL). Please manually remove the alias from your shell config."
     exit 1
