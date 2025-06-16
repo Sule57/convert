@@ -120,7 +120,12 @@ def main(markdown_text, file, output):
     
     # Get output path
     if not output:
-        output = get_output_path()
+        if file:
+            # Use the same base name as the input file, but with .pdf extension
+            base, _ = os.path.splitext(file)
+            output = base + '.pdf'
+        else:
+            output = get_output_path()
     
     try:
         convert_markdown_to_pdf(markdown_content, output)

@@ -24,21 +24,24 @@ brew install cairo pango gdk-pixbuf libffi gobject-introspection
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
+# Run the installation script (recommended)
+./install.sh
+
+# OR manually install:
 # Create and activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
 # Install Python dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
-# Add alias to your shell config (choose one based on your shell)
-# For zsh (default on newer macOS):
-echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.zshrc
+# Add alias to your shell config (zsh is default on newer macOS):
+echo 'alias mdpdf="$(pwd)/venv/bin/python3 $(pwd)/mdpdf.py"' >> ~/.zshrc
 source ~/.zshrc
 
-# For bash:
-# echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.bash_profile
-# source ~/.bash_profile
+# If you use bash instead of zsh on macOS:
+# echo 'alias mdpdf="$(pwd)/venv/bin/python3 $(pwd)/mdpdf.py"' >> ~/.bashrc
+# source ~/.bashrc
 ```
 
 ### Ubuntu/Debian Linux
@@ -51,21 +54,20 @@ sudo apt install -y python3-venv python3-pip libcairo2 pango1.0-tools libgdk-pix
 git clone https://github.com/Sule57/mdpdf.git
 cd mdpdf
 
+# Run the installation script (recommended)
+./install.sh
+
+# OR manually install:
 # Create and activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
 # Install Python dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
-# Add alias to your shell config (choose one based on your shell)
-# For bash (default on most Linux):
-echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.bashrc
+# Add alias to your shell config (this will work permanently)
+echo 'alias mdpdf="$(pwd)/venv/bin/python3 $(pwd)/mdpdf.py"' >> ~/.bashrc
 source ~/.bashrc
-
-# For zsh:
-# echo 'alias mdpdf="$(pwd)/venv/bin/python $(pwd)/mdpdf.py"' >> ~/.zshrc
-# source ~/.zshrc
 ```
 
 ### Windows (PowerShell)
@@ -91,6 +93,21 @@ if (!(Test-Path -Path $PROFILE)) {
 Add-Content -Path $PROFILE -Value "`nfunction mdpdf { & '$(Get-Location)\venv\Scripts\python.exe' '$(Get-Location)\mdpdf.py' `$args }"
 . $PROFILE
 ```
+
+## 🔧 Troubleshooting
+
+If you experience issues where the `mdpdf` command stops working after logging out and back in:
+
+1. **Use the installation script**: Run `./install.sh` from the mdpdf directory
+2. **Manual fix**: The issue is likely with the alias path. Remove the old alias and add a new one:
+   ```bash
+   # Remove old alias (if exists)
+   sed -i.bak '/^alias mdpdf=/d' ~/.zshrc
+   
+   # Add new alias with absolute path
+   echo 'alias mdpdf="/Users/yourusername/path/to/mdpdf/venv/bin/python3 /Users/yourusername/path/to/mdpdf/mdpdf.py"' >> ~/.zshrc
+   source ~/.zshrc
+   ```
 
 ## Contributing
 
@@ -126,4 +143,4 @@ mdpdf -f input.md -o output.pdf
 - `-f, --file`: Path to the input markdown file
 - `-o, --output`: Path to the output PDF file
 
-If no output file is specified, you will be prompted to enter the output file path. 
+If no output file is specified and a file is provided with `-f`, the output will be created in the same directory with the same name but with a `.pdf` extension. If markdown text is provided directly, you will be prompted to enter the output file path. 
