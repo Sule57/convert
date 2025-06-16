@@ -1,17 +1,18 @@
-# MDPDF - Markdown to PDF Converter
+# Universal File Converter
 
-A simple and elegant CLI tool for converting markdown files into beautifully formatted PDFs.
+A powerful and elegant CLI tool for converting files between different formats. Currently supports markdown to PDF conversion and image format conversions.
 
 [![GitHub](https://img.shields.io/github/license/Sule57/mdpdf)](https://github.com/Sule57/mdpdf/blob/main/LICENSE)
 [![GitHub](https://img.shields.io/github/stars/Sule57/mdpdf)](https://github.com/Sule57/mdpdf/stargazers)
 
 ## Features
 
-- 🎨 Beautiful PDF output with proper styling
+- 🎨 **Markdown to PDF**: Beautiful PDF output with proper styling
+- 🖼️ **Image Format Conversion**: Convert between PNG, JPG, WebP, and SVG formats
 - 📝 Support for markdown tables and code blocks
 - 🚀 Simple and intuitive CLI interface
 - 💻 Cross-platform support (macOS, Linux, Windows)
-- 🔄 Interactive output path selection
+- 📁 Automatic output naming (same location, new extension)
 
 ## 🚀 Quick Install
 
@@ -36,11 +37,11 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 
 # Add alias to your shell config (zsh is default on newer macOS):
-echo 'alias mdpdf="$(pwd)/venv/bin/python3 $(pwd)/mdpdf.py"' >> ~/.zshrc
+echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.zshrc
 source ~/.zshrc
 
 # If you use bash instead of zsh on macOS:
-# echo 'alias mdpdf="$(pwd)/venv/bin/python3 $(pwd)/mdpdf.py"' >> ~/.bashrc
+# echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.bashrc
 # source ~/.bashrc
 ```
 
@@ -66,7 +67,7 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 
 # Add alias to your shell config (this will work permanently)
-echo 'alias mdpdf="$(pwd)/venv/bin/python3 $(pwd)/mdpdf.py"' >> ~/.bashrc
+echo 'alias convert="$(pwd)/venv/bin/python3 $(pwd)/convert.py"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -90,22 +91,22 @@ python -m pip install -r requirements.txt
 if (!(Test-Path -Path $PROFILE)) {
     New-Item -ItemType File -Path $PROFILE -Force
 }
-Add-Content -Path $PROFILE -Value "`nfunction mdpdf { & '$(Get-Location)\venv\Scripts\python.exe' '$(Get-Location)\mdpdf.py' `$args }"
+Add-Content -Path $PROFILE -Value "`nfunction convert { & '$(Get-Location)\venv\Scripts\python.exe' '$(Get-Location)\convert.py' `$args }"
 . $PROFILE
 ```
 
 ## 🔧 Troubleshooting
 
-If you experience issues where the `mdpdf` command stops working after logging out and back in:
+If you experience issues where the `convert` command stops working after logging out and back in:
 
-1. **Use the installation script**: Run `./install.sh` from the mdpdf directory
+1. **Use the installation script**: Run `./install.sh` from the converter directory
 2. **Manual fix**: The issue is likely with the alias path. Remove the old alias and add a new one:
    ```bash
    # Remove old alias (if exists)
-   sed -i.bak '/^alias mdpdf=/d' ~/.zshrc
+   sed -i.bak '/^alias convert=/d' ~/.zshrc
    
    # Add new alias with absolute path
-   echo 'alias mdpdf="/Users/yourusername/path/to/mdpdf/venv/bin/python3 /Users/yourusername/path/to/mdpdf/mdpdf.py"' >> ~/.zshrc
+   echo 'alias convert="/Users/yourusername/path/to/mdpdf/venv/bin/python3 /Users/yourusername/path/to/mdpdf/convert.py"' >> ~/.zshrc
    source ~/.zshrc
    ```
 
@@ -121,26 +122,71 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 # Usage
 
-The tool can be used in three ways:
+## Markdown to PDF Conversion
 
-1. Convert markdown text directly:
+Convert markdown files to PDF:
+
+1. **Convert with automatic output naming:**
 ```bash
-mdpdf "Your markdown text here"
+convert -f input.md -t pdf
 ```
 
-2. Convert a markdown file:
+2. **Convert with custom output path:**
 ```bash
-mdpdf -f input.md
+convert -f input.md -t pdf -o output.pdf
 ```
 
-3. Convert a markdown file to a specific output file:
+3. **Convert with format detected from output file:**
 ```bash
-mdpdf -f input.md -o output.pdf
+convert -f input.md -o output.pdf
+```
+
+## Image Format Conversion
+
+Convert images between different formats:
+
+1. **Convert with automatic output naming:**
+```bash
+convert -f image.png -t jpg
+```
+
+2. **Convert with custom output path:**
+```bash
+convert -f image.png -t jpg -o new_image.jpg
+```
+
+3. **Convert with format detected from output file:**
+```bash
+convert -f image.png -o new_image.jpg
+```
+
+4. **Convert SVG to other formats:**
+```bash
+convert -f logo.svg -t png -o logo.png
+convert -f icon.svg -o icon.webp
 ```
 
 ## Options
 
-- `-f, --file`: Path to the input markdown file
-- `-o, --output`: Path to the output PDF file
+- `-f, --file`: Path to the input file (required)
+- `-t, --target`: Target format (optional if -o is provided)
+  - For markdown: `pdf`
+  - For images: `png`, `jpg`, `webp`
+- `-o, --output`: Path to the output file (optional)
 
-If no output file is specified and a file is provided with `-f`, the output will be created in the same directory with the same name but with a `.pdf` extension. If markdown text is provided directly, you will be prompted to enter the output file path. 
+## Supported Formats
+
+### Input Formats
+- **Markdown**: `.md`, `.markdown`
+- **Images**: `.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`
+
+### Output Formats
+- **Markdown**: `.pdf`
+- **Images**: `.png`, `.jpg`, `.webp`
+
+## Default Behavior
+
+- If no output file is specified with `-o`, the output will be created in the same directory with the same name but with the appropriate extension
+- The target format can be specified with `-t` or automatically detected from the output file extension with `-o`
+- When both `-t` and `-o` are provided, the tool validates that they are consistent
+- Markdown files can only be converted to PDF format 

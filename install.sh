@@ -1,19 +1,19 @@
 #!/bin/bash
 
-# MDPDF Installation Script
-# This script properly installs mdpdf and creates a persistent alias
+# Universal File Converter Installation Script
+# This script properly installs the convert tool and creates a persistent alias
 
 set -e  # Exit on any error
 
-echo "🚀 Installing MDPDF..."
+echo "🚀 Installing Universal File Converter..."
 
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Check if we're in the right directory
-if [ ! -f "$SCRIPT_DIR/mdpdf.py" ]; then
-    echo "❌ Error: mdpdf.py not found in current directory"
-    echo "Please run this script from the mdpdf directory"
+if [ ! -f "$SCRIPT_DIR/convert.py" ]; then
+    echo "❌ Error: convert.py not found in current directory"
+    echo "Please run this script from the converter directory"
     exit 1
 fi
 
@@ -36,22 +36,22 @@ elif [ "$SHELL" = "/bin/bash" ]; then
 else
     echo "⚠️  Warning: Unsupported shell ($SHELL). Please manually add the alias to your shell config."
     echo "Add this line to your shell config file:"
-    echo "alias mdpdf='$SCRIPT_DIR/venv/bin/python3 $SCRIPT_DIR/mdpdf.py'"
+    echo "alias convert='$SCRIPT_DIR/venv/bin/python3 $SCRIPT_DIR/convert.py'"
     exit 0
 fi
 
-# Remove any existing mdpdf alias
+# Remove any existing convert alias
 if [ -f "$SHELL_CONFIG" ]; then
-    # Remove existing mdpdf alias lines
-    sed -i.bak '/^alias mdpdf=/d' "$SHELL_CONFIG" 2>/dev/null || true
-    sed -i.bak '/^# MDPDF alias/d' "$SHELL_CONFIG" 2>/dev/null || true
+    # Remove existing convert alias lines
+    sed -i.bak '/^alias convert=/d' "$SHELL_CONFIG" 2>/dev/null || true
+    sed -i.bak '/^# Universal File Converter alias/d' "$SHELL_CONFIG" 2>/dev/null || true
 fi
 
 # Add the new alias
-echo "🔗 Adding mdpdf alias to $SHELL_CONFIG..."
+echo "🔗 Adding convert alias to $SHELL_CONFIG..."
 echo "" >> "$SHELL_CONFIG"
-echo "# MDPDF alias - added by install script" >> "$SHELL_CONFIG"
-echo "alias mdpdf='$SCRIPT_DIR/venv/bin/python3 $SCRIPT_DIR/mdpdf.py'" >> "$SHELL_CONFIG"
+echo "# Universal File Converter alias - added by install script" >> "$SHELL_CONFIG"
+echo "alias convert='$SCRIPT_DIR/venv/bin/python3 $SCRIPT_DIR/convert.py'" >> "$SHELL_CONFIG"
 
 # Reload shell config
 echo "🔄 Reloading shell configuration..."
@@ -63,10 +63,17 @@ fi
 
 echo "✅ Installation complete!"
 echo ""
-echo "You can now use mdpdf from anywhere:"
-echo "  mdpdf \"Your markdown text here\""
-echo "  mdpdf -f input.md"
-echo "  mdpdf -f input.md -o output.pdf"
+echo "You can now use convert from anywhere:"
+echo "  # Markdown to PDF"
+echo "  convert -f input.md -t pdf"
+echo "  convert -f input.md -t pdf -o output.pdf"
+echo "  convert -f input.md -o output.pdf"
+echo ""
+echo "  # Image format conversion"
+echo "  convert -f image.png -t jpg"
+echo "  convert -f image.png -t jpg -o new_image.jpg"
+echo "  convert -f image.png -o new_image.jpg"
+echo "  convert -f logo.svg -t png -o logo.png"
 echo ""
 echo "If the command doesn't work immediately, please restart your terminal or run:"
 echo "  source $SHELL_CONFIG" 

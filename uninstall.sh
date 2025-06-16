@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# MDPDF Uninstall Script
-# This script removes the mdpdf alias from your shell configuration
+# Universal File Converter Uninstall Script
+# This script removes the convert alias from your shell configuration
 
-echo "🗑️  Uninstalling MDPDF..."
+echo "🗑️  Uninstalling Universal File Converter..."
 
 # Determine shell and config file
 SHELL_CONFIG=""
@@ -16,18 +16,18 @@ else
     exit 1
 fi
 
-# Remove mdpdf alias lines
+# Remove convert alias lines
 if [ -f "$SHELL_CONFIG" ]; then
-    echo "🔗 Removing mdpdf alias from $SHELL_CONFIG..."
+    echo "🔗 Removing convert alias from $SHELL_CONFIG..."
     
     # Create backup
     cp "$SHELL_CONFIG" "$SHELL_CONFIG.backup.$(date +%Y%m%d_%H%M%S)"
     
     # Remove alias lines
-    sed -i.bak '/^alias mdpdf=/d' "$SHELL_CONFIG"
-    sed -i.bak '/^# MDPDF alias/d' "$SHELL_CONFIG"
+    sed -i.bak '/^alias convert=/d' "$SHELL_CONFIG"
+    sed -i.bak '/^# Universal File Converter alias/d' "$SHELL_CONFIG"
     
-    echo "✅ MDPDF alias removed from $SHELL_CONFIG"
+    echo "✅ convert alias removed from $SHELL_CONFIG"
     echo "📋 Backup created at $SHELL_CONFIG.backup.$(date +%Y%m%d_%H%M%S)"
 else
     echo "❌ Shell config file $SHELL_CONFIG not found"
@@ -35,5 +35,5 @@ fi
 
 echo ""
 echo "To complete the uninstallation, you can also:"
-echo "1. Delete the mdpdf directory: rm -rf $(pwd)"
+echo "1. Delete the converter directory: rm -rf $(pwd)"
 echo "2. Restart your terminal or run: source $SHELL_CONFIG" 
